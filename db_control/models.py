@@ -1,6 +1,7 @@
-from sqlalchemy import Column, Integer, String, Date, Text, ForeignKey, DateTime
+from sqlalchemy import Column, Integer, String, Date, Text, ForeignKey, DateTime, DECIMAL
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 from sqlalchemy.sql import func
+from decimal import Decimal
 from db_control.connect import Base
 
 class Products(Base):
@@ -12,7 +13,7 @@ class Products(Base):
 
 class Transaction(Base):
     __tablename__ = "transaction"
-    trd_id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    trd_id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
     datetime: Mapped[str] = mapped_column(String(45))
     emp_cd: Mapped[str] = mapped_column(String(10))
     store_cd: Mapped[str] = mapped_column(String(5))
@@ -28,3 +29,9 @@ class Details(Base):
     prd_code: Mapped[str] = mapped_column(String(13))
     prd_name: Mapped[str] = mapped_column(String(50))
     prd_price: Mapped[int] = mapped_column(Integer)
+    tax_id: Mapped[int] = mapped_column(Integer)
+
+class Tax(Base):
+    __tablename__ = "tax"
+    tax_id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    tax: Mapped[Decimal] = mapped_column(DECIMAL(3, 2))

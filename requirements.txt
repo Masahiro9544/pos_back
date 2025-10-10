@@ -9,3 +9,4 @@ numpy==1.26.2
 
 python-dateutil==2.8.2
 pymysql==1.1.1
+PyJWT==2.8.0
